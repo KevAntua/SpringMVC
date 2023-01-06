@@ -7,4 +7,6 @@ public interface ICursosService {
     
     public List<Cursos> listarCursos();
     
+    public void eliminarCurso (int idCurso);
+    
 }

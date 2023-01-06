@@ -16,5 +16,10 @@ public class CursosServiceImpl implements ICursosService{
     public List<Cursos> listarCursos() {
         return (List<Cursos>) cursosRepository.findAll();
     }
+
+    @Override
+    public void eliminarCurso(int idCurso) {
+        cursosRepository.deleteById(idCurso);
+    }
     
 }

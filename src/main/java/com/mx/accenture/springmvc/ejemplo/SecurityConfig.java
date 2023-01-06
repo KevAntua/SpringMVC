@@ -18,6 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/","/css/**","/js/**").permitAll()
                 .antMatchers("/principal").hasAnyRole("USER")
+                .and()
+                    .authorizeRequests().antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/listar").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -26,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                     .logout()
                     .permitAll();
+        
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
     
     @Bean
