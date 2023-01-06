@@ -1,5 +1,6 @@
 package com.mx.accenture.springmvc.ejemplo.controller;
 
+import com.google.gson.Gson;
 import com.mx.accenture.springmvc.ejemplo.model.Cursos;
 import com.mx.accenture.springmvc.ejemplo.service.ICursosService;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,8 @@ public class ControladorPrincipal{
     @Autowired
     private ICursosService cursosService;
     
-    @GetMapping({"/principal","/"})
-    public String presentacion(Model model) {
+    @GetMapping(value = {"/principal","/"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String presentacion() {
         log.info("Ejecutando controlador Spring MVC");
         var mensajeSalida = "Mensaje desde el controlador";
 
@@ -47,19 +49,21 @@ public class ControladorPrincipal{
         cursos.add(curso1);
         cursos.add(curso2);
 
+        String jsonResponse = new Gson().toJson(cursos);
 
-        return mensajeSalida;
+        return jsonResponse;
     }
 
-    @GetMapping("/listar")
-    public String listaRepository(Model model){
+    @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String listaRepository(){
         log.info("Ejecutando controlador Spring MVC con lista dinamica de JPARepository");
-        var mensajeSalidaJPA = "Mensaje desde el controlador con JPA";
+
         List<Cursos> listaRepository = new ArrayList();
         listaRepository.addAll(cursosService.listarCursos());
         var lista = cursosService.listarCursos();
-        model.addAttribute("mensajeControllerJPA", mensajeSalidaJPA);
-        model.addAttribute("listaBDH2", lista);
-        return "viewJPARepository";
+
+        String jsonResponse = new Gson().toJson(lista);
+
+        return jsonResponse;
     }
 }
