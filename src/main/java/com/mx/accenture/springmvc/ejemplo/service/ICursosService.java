@@ -6,5 +6,6 @@ import java.util.List;
 public interface ICursosService {
     
     public List<Cursos> listarCursos();
-    
+
+    Cursos guardarCourso(Cursos curso);
 }
