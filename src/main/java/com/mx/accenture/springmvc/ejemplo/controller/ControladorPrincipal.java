@@ -4,16 +4,17 @@ import com.mx.accenture.springmvc.ejemplo.model.Cursos;
 import com.mx.accenture.springmvc.ejemplo.service.ICursosService;
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.ResponseEntity;
-
 
 @Slf4j
 @RestController
@@ -36,7 +37,7 @@ public class ControladorPrincipal{
         curso1.setNombreProfesor("Kevin");
         curso1.setNumeroAlumnos(100);
         curso1.setNumeroLecciones(1);
-        
+
         Cursos curso2 = new Cursos();
         curso2.setIdCurso(2);
         curso2.setNombreCurso("Uso de Spring MVC");
@@ -55,6 +56,7 @@ public class ControladorPrincipal{
 
 
         //return cursos.toString();
+
         return mensajeSalida;
     }
 
@@ -67,17 +69,13 @@ public class ControladorPrincipal{
         var lista = cursosService.listarCursos();
         model.addAttribute("mensajeControllerJPA", mensajeSalidaJPA);
         model.addAttribute("listaBDH2", lista);
-
-        Integer test = Integer.valueOf(lista.size());
-        return "viewJPARepository Number of rows-->"+test;
+        return "viewJPARepository";
     }
 
-    /*@PostMapping("/agregarCurso")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Course addCourse(@RequestBody Course course) {
-        return courseService.saveCourse(course);
-        void addCourse (@RequestBody Course course){
-            courseServiceImpl.saveCourse(course);
-        }
-    }*/
+    @GetMapping("/eliminar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCurso (@PathVariable int id){
+        log.info("Ejecutando controlador para eliminar del repository con Spring");
+        cursosService.eliminarCurso(id);
+    }
 }

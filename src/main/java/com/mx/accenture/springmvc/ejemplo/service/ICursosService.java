@@ -4,8 +4,9 @@ import com.mx.accenture.springmvc.ejemplo.model.Cursos;
 import java.util.List;
 
 public interface ICursosService {
-    
+
     public List<Cursos> listarCursos();
 
-    Cursos guardarCourso(Cursos curso);
+    public void eliminarCurso (int idCurso);
+
 }
