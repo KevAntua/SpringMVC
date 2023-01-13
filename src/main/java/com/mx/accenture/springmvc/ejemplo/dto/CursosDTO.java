@@ -1,38 +1,14 @@
-package com.mx.accenture.springmvc.ejemplo.model;
+package com.mx.accenture.springmvc.ejemplo.dto;
 
-import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "Cursos")
-public class Cursos implements Serializable {
-
-    /*public Cursos(){
-
-    }*/
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_curso")
-    private int idCurso;
-    @Column(name = "nombre_curso")
+public class CursosDTO implements Serializable {
     private String nombreCurso;
-    @Column(name = "tipo_curso")
     private String tipoCurso;
-    @Column(name = "nombre_profesor")
     private String nombreProfesor;
-    @Column(name = "numero_alumnos")
     private int numeroAlumnos;
-    @Column(name = "numero_lecciones")
     private int numeroLecciones;
-
-
 
     public int getIdCurso() {
         return idCurso;
@@ -41,6 +17,8 @@ public class Cursos implements Serializable {
     public void setIdCurso(int idCurso) {
         this.idCurso = idCurso;
     }
+
+    private int idCurso;
 
     public String getNombreCurso() {
         return nombreCurso;
@@ -70,7 +48,7 @@ public class Cursos implements Serializable {
         return numeroAlumnos;
     }
 
-    public void setNumeroAlumnos(Integer numeroAlumnos) {
+    public void setNumeroAlumnos(int numeroAlumnos) {
         this.numeroAlumnos = numeroAlumnos;
     }
 
@@ -78,7 +56,19 @@ public class Cursos implements Serializable {
         return numeroLecciones;
     }
 
-    public void setNumeroLecciones(Integer numeroLecciones) {
+    public void setNumeroLecciones(int numeroLecciones) {
         this.numeroLecciones = numeroLecciones;
     }
+
+    public CursosDTO(int idCurso, String nombreCurso, String tipoCurso, String nombreProfesor, int numeroAlumnos, int numeroLecciones) {
+        this.idCurso = idCurso;
+        this.nombreCurso = nombreCurso;
+        this.tipoCurso = tipoCurso;
+        this.nombreProfesor = nombreProfesor;
+        this.numeroAlumnos = numeroAlumnos;
+        this.numeroLecciones = numeroLecciones;
+
+    }
 }
+
+

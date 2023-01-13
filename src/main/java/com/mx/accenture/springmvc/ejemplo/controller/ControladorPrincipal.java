@@ -1,19 +1,14 @@
 package com.mx.accenture.springmvc.ejemplo.controller;
 
-import com.mx.accenture.springmvc.ejemplo.model.Cursos;
+import com.mx.accenture.springmvc.ejemplo.dto.CursosDTO;
 import com.mx.accenture.springmvc.ejemplo.service.ICursosService;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -21,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class ControladorPrincipal{
 
+    //@Autowired
+    //CursosRepository cursosRepository;
     @Autowired
     private ICursosService cursosService;
     
     //@GetMapping({"/principal","/"})
-    @GetMapping("/principal")
+    /*@GetMapping("/principal")
     public String presentacion(Model model) {
         log.info("Ejecutando controlador Spring MVC");
         var mensajeSalida = "Mensaje desde el controlador";
@@ -58,22 +55,22 @@ public class ControladorPrincipal{
         //return cursos.toString();
 
         return mensajeSalida;
-    }
+    }*/
+
 
     @GetMapping("/listar")
-    public String listaRepository(Model model){
+    public List<CursosDTO> listaRepository(Model model){
         log.info("Ejecutando controlador Spring MVC con lista dinamica de JPARepository");
         var mensajeSalidaJPA = "Mensaje desde el controlador con JPA";
-        List<Cursos> listaRepository = new ArrayList();
-        listaRepository.addAll(cursosService.listarCursos());
+        List<CursosDTO> listaRepository = cursosService.listarCursos();//new ArrayList();
+        /*listaRepository.addAll(cursosService.listarCursos());
         var lista = cursosService.listarCursos();
         model.addAttribute("mensajeControllerJPA", mensajeSalidaJPA);
-        model.addAttribute("listaBDH2", lista);
-        return "viewJPARepository";
+        model.addAttribute("listaBDH2", lista);*/
+        return listaRepository;
     }
 
     @GetMapping("/eliminar/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminarCurso (@PathVariable int id){
         log.info("Ejecutando controlador para eliminar del repository con Spring");
         cursosService.eliminarCurso(id);
