@@ -1,10 +1,10 @@
-package com.mx.accenture.springmvc.ejemplo;
+package com.mx.accenture.springmvc.example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EjemploMvcApplicationTests {
+class ExampleMvcApplicationTests {
 
 	@Test
 	void contextLoads() {

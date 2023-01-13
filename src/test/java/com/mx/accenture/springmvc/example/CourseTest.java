@@ -1,8 +1,12 @@
-package com.mx.accenture.springmvc.ejemplo;
+package com.mx.accenture.springmvc.example;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.Assert.assertEquals;
+
+import com.mx.accenture.springmvc.example.controller.CourseController;
+import com.mx.accenture.springmvc.example.service.ICourseService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mx.accenture.springmvc.ejemplo.controller.ControladorPrincipal;
-import com.mx.accenture.springmvc.ejemplo.service.ICursosService;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -16,11 +20,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(ControladorPrincipal.class)
+@WebMvcTest(CourseController.class)
 public class CourseTest {
 
     //MockMvc component is provided by Spring to make calls to the Spring MVC API and assert different properties like status code and received response.
@@ -31,13 +32,13 @@ public class CourseTest {
     ObjectMapper mapper;
 
     @MockBean
-    private ICursosService iCursoService; // This will mock a Spring Bean and Inject it where is needed
+    private ICourseService iCursoService; // This will mock a Spring Bean and Inject it where is needed
 
 
     @WithMockUser("admin")
     @Test
     void getAllCoursesTest() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/listar"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/list"))
                 .andExpect(status().isOk()).andReturn(); //check is response status is 200
         assertEquals(200, result.getResponse().getStatus());
     }
@@ -45,7 +46,7 @@ public class CourseTest {
     @WithMockUser("admin")
     @Test
     void deleteCourseByIdTest() throws Exception{
-        MvcResult result =mockMvc.perform(MockMvcRequestBuilders.get("/eliminar/1"))
+        MvcResult result =mockMvc.perform(MockMvcRequestBuilders.get("/delete/1"))
                 .andExpect(status().isOk()) //check is response status is 200
                 .andReturn();
         assertEquals(200, result.getResponse().getStatus());

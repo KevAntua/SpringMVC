@@ -1,4 +1,4 @@
-package com.mx.accenture.springmvc.ejemplo.security;
+package com.mx.accenture.springmvc.example.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

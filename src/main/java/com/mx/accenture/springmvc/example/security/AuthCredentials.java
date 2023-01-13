@@ -1,4 +1,4 @@
-package com.mx.accenture.springmvc.ejemplo.security;
+package com.mx.accenture.springmvc.example.security;
 
 public class AuthCredentials {
     private String username;

@@ -1,4 +1,4 @@
-package com.mx.accenture.springmvc.ejemplo.security;
+package com.mx.accenture.springmvc.example.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

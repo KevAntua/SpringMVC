@@ -1,4 +1,4 @@
-package com.mx.accenture.springmvc.ejemplo.security;
+package com.mx.accenture.springmvc.example.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
